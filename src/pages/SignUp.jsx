@@ -7,7 +7,7 @@ function SignUp({ text }) {
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="text-lionly-2xl text-lionly-white">회원가입</h1>
+        <h2 className="text-lionly-2xl text-lionly-white">회원가입</h2>
         <LionLogo className="h-[58px] w-[58px]" />
       </div>
       <FormInput
