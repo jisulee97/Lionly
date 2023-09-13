@@ -1,4 +1,4 @@
-import { ChannelTab } from '@/components/button';
+import { ChannelTab } from '@/components/Button';
 import FeedHeader from '@/components/layout/FeedHeader';
 import FeedList from '@/components/layout/FeedList';
 import { Outlet } from 'react-router-dom';

@@ -3,7 +3,7 @@ import { handleTabArrowControl } from '@/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogoutButton, ProfileImage, WritingButton } from '../button';
+import { LogoutButton, ProfileImage, WritingButton } from '../Button';
 import { ReactComponent as LionHeadLogo } from '/src/assets/lionHeadLogo_common.svg';
 
 function FeedHeader() {
