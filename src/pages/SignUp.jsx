@@ -1,7 +1,7 @@
 import createUserInfo from '@/api/createUserInfo';
 import LinkButton from '@/components/Button/LinkButton';
 import FormInput from '@/components/input/FormInput';
-// import { nameReg, idReg, nickNameReg, passWordReg } from '@/utils/validation';
+import { nameReg, idReg, nickNameReg, passWordReg } from '@/utils/validation';
 import { ClientResponseError } from 'pocketbase';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -35,42 +35,44 @@ function SignUp({ text }) {
         passwordConfirm: userpasswordcheck,
       };
 
-      // if (!nameReg(name)) {
-      //   toast.error('이름 형식이 잘못되었습니다.');
-      //   return;
-      // }
-      // if (!idReg(userid)) {
-      //   toast.error('이메일 형식이 잘못되었습니다.');
-      //   return;
-      // }
-      // if (!nickNameReg(usernickname)) {
-      //   toast.error('닉네임 형식이 잘못되었습니다.');
-      //   return;
-      // }
-      // if (!passWordReg(userpassword)) {
-      //   toast.error('비밀번호 형식이 잘못되었습니다.');
-      //   return;
-      // }
-      // if (userpassword !== userpasswordcheck) {
-      //   toast.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-      //   return;
-      // }
+      if (!nameReg(name)) {
+        toast.error('이름 형식이 잘못되었습니다.');
+        return;
+      }
+      if (!idReg(userid)) {
+        toast.error('이메일 형식이 잘못되었습니다.');
+        return;
+      }
+      if (!nickNameReg(usernickname)) {
+        toast.error('닉네임 형식이 잘못되었습니다.');
+        return;
+      }
+      if (!passWordReg(userpassword)) {
+        toast.error('비밀번호 형식이 잘못되었습니다.');
+        return;
+      }
+      if (userpassword !== userpasswordcheck) {
+        toast.error('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        return;
+      }
 
       const record = await createUserInfo(newUser);
-      console.log(record);
+      // console.log(record);
       if (record?.id) {
+        toast.success('회원가입이 완료됐습니다.');
         navigate('/SignIn');
       } else {
-        alert('회원가입에 실패했습니다.');
+        toast.error('회원가입에 실패했습니다.');
       }
     } catch (error) {
-      console.log(error.response);
-
       if (error.response.code === 400) {
-        // if (error.response.data.email.message.includes('already')) {
-        //   toast.error('이메일이 중복됩니다.');
-        // }
-        if (error.response.data.nickname.message.includes('unique')) {
+        const { email, nickname } = error.response.data;
+
+        if (email && email.message.includes('already')) {
+          toast.error('이메일이 중복됩니다.');
+        }
+
+        if (nickname && nickname.message.includes('unique')) {
           toast.error('닉네임이 중복됩니다.');
         }
       } else {
