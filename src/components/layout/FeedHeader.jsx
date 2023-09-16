@@ -1,14 +1,15 @@
 import useStorageData from '@/hooks/useStorageData';
 import { useNavigate } from 'react-router-dom';
-import { LogoutButton, ProfileImage, WritingButton } from '../Button';
-import { ReactComponent as LionHeadLogo } from '/src/assets/lionHeadLogo_common.svg';
+import { LogoutButton, ProfileImage, WritingButton } from '../button';
+import { ReactComponent as LionHeadLogoSVG } from '/src/assets/lionHeadLogo_common.svg';
+import { ReactComponent as ProfileEditSVG } from '/src/assets/profileEdit_Feed.svg';
 
 function FeedHeader() {
   const navigate = useNavigate();
   const { id, nickname, profile_image } = useStorageData();
 
   return (
-    <div className="bg-lionly-primary-color px-4">
+    <header className="bg-lionly-primary-color px-4">
       <div className="flex items-center justify-between border-b border-lionly-secondary-color">
         <div className="flex items-center gap-x-2.5">
           <LionHeadLogoSVG aria-hidden />
@@ -36,8 +37,8 @@ function FeedHeader() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
-export default memo(FeedHeader);
+export default FeedHeader;

@@ -13,6 +13,7 @@ import {
   Writing,
 } from './pages';
 import ProtectedRoute from './components/ProtecteRoute.jsx';
+import Edit from './pages/Edit.jsx';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/edit',
+        element: (
+          <ProtectedRoute>
+            <Edit />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/mypage',
         element: (
           <ProtectedRoute>
@@ -63,10 +72,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          {
-            path: '/feed',
-            element: <FeedList />,
-          },
+          { path: '/feed', element: <FeedList /> },
           { path: '/feed/healings', element: <FeedList /> },
           { path: '/feed/jobs', element: <FeedList /> },
           { path: '/feed/foods', element: <FeedList /> },
@@ -74,7 +80,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: '/content/:contentId',
+        path: 'feed/content/:feedId',
         element: <Content />,
       },
     ],
