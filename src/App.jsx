@@ -5,6 +5,8 @@ import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
 import { AuthProvider, ChannelProvider, ContentProvider } from './contexts';
 import router from './routes.jsx';
+import { Suspense } from 'react';
+import Spinner from './components/Spinner';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +19,23 @@ function App() {
             <ChannelProvider>
               <ContentProvider>
                 <AnimatePresence>
-                  <RouterProvider router={router} />
+                  <div className="App">
+                    <Suspense
+                      fallback={
+                        <div className="h-screen">
+                          <Spinner size={'50%'} />
+                          <p
+                            role="status"
+                            className="text-center text-lionly-lg text-lionly-black"
+                          >
+                            페이지 이동 중입니다.
+                          </p>
+                        </div>
+                      }
+                    >
+                      <RouterProvider router={router} />
+                    </Suspense>
+                  </div>
                 </AnimatePresence>
               </ContentProvider>
             </ChannelProvider>
