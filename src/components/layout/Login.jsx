@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import debounce from '@/utils/debounce';
 import pb from '@/api/pocketbase';
-import { useEffect, useState } from 'react';
-import { useRef } from 'react';
-import LinkButton from '../button/LinkButton';
+import { debounce } from '@/utils';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useAnimation, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { LinkButton } from '../button';
+
 function Login() {
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -36,6 +36,9 @@ function Login() {
 
       if (pb.authStore.isValid) {
         navigate('/feed');
+        scrollTo({
+          top: 0,
+        });
         toast.success(`안녕하세요! ${pb.authStore.model.name}님`, {
           icon: '👏',
         });
@@ -69,7 +72,7 @@ function Login() {
         </label>
         <motion.input
           animate={controls}
-          className="h-11 w-full rounded border border-lionly-white bg-transparent px-5 py-3 text-lionly-sm outline-none placeholder:text-lionly-white"
+          className="h-11 w-full rounded border border-lionly-white bg-transparent px-5 py-3 text-lionly-base outline-none placeholder:text-lionly-white"
           placeholder="아이디를 입력해주세요"
           ref={emailRef}
           type="email"
@@ -86,7 +89,7 @@ function Login() {
         </label>
         <motion.input
           animate={controls}
-          className="mb-1 h-11 w-full rounded border border-lionly-white bg-transparent px-5 py-3 text-lionly-sm outline-none placeholder:text-lionly-white"
+          className="mb-1 h-11 w-full rounded border border-lionly-white bg-transparent px-5 py-3 text-lionly-base outline-none placeholder:text-lionly-white"
           ref={passwordRef}
           placeholder="비밀번호를 입력해주세요"
           type="password"
@@ -103,6 +106,9 @@ function Login() {
             text={'회원가입'}
             onClick={() => {
               navigate('/signup');
+              scrollTo({
+                top: 0,
+              });
             }}
           />
         </div>
